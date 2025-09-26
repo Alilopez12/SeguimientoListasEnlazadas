@@ -2,11 +2,13 @@ package co.edu.uniquindio.listas;
 
 public class Nodo<T> {
     private T dato;
-    private co.edu.uniquindio.listas.Nodo<T> proximo;
+    private Nodo<T> anterior;
+    private Nodo<T> siguiente;
 
     public Nodo(T dato) {
         this.dato = dato;
-        this.proximo = null;
+        this.anterior = null;
+        this.siguiente = null;
     }
 
     public T getDato() {
@@ -17,20 +19,28 @@ public class Nodo<T> {
         this.dato = dato;
     }
 
-    public co.edu.uniquindio.listas.Nodo<T> getProximo() {
-        return proximo;
+    public Nodo<T> getAnterior() {
+        return anterior;
     }
 
-    public void setProximo( co.edu.uniquindio.listas.Nodo<T> proximo) {
-        this.proximo = proximo;
+    public void setAnterior(Nodo<T> anterior) {
+        this.anterior = anterior;
+    }
+
+    public Nodo<T> getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo<T> siguiente) {
+        this.siguiente = siguiente;
     }
 
     @Override
     public String toString() {
         return "Nodo{" +
                 "dato=" + dato +
-                ", proximo=" + proximo +
+                ", anterior=" + (anterior != null ? anterior.getDato() : "null") +
+                ", siguiente=" + (siguiente != null ? siguiente.getDato() : "null") +
                 '}';
     }
-
 }

@@ -1,6 +1,5 @@
 package co.edu.uniquindio.listas;
 
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -25,7 +24,7 @@ public class IteratorListaCircular<T> implements Iterator<T> {
             throw new NoSuchElementException("No hay más elementos en la lista");
         }
         T dato = actual.getDato();
-        actual = actual.getProximo();
+        actual = actual.getSiguiente();
         cont++;
         return dato;
     }
