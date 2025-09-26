@@ -10,6 +10,62 @@ public class ListaDobleSimple<T> {
         this.ultimo = null;
         this.size = 0;
     }
+    public void agregarAlInicio(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (esVacia()) {
+            primero = nuevo;
+            ultimo = nuevo;
+        } else {
+            nuevo.setSiguiente(primero);
+            primero.setAnterior(nuevo);
+            primero = nuevo;
+        }
+        size++;
+    }
+    public void agregarAlFinal(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (esVacia()) {
+            primero = nuevo;
+            ultimo = nuevo;
+        } else {
+            ultimo.setSiguiente(nuevo);
+            nuevo.setAnterior(ultimo);
+            ultimo = nuevo;
+        }
+        size++;
+    }
+    public void agregarEnPosicion(T dato, int posicion) {
+        if (posicion < 0 || posicion > size) {
+            throw new IndexOutOfBoundsException("Posición inválida");
+        }
+
+        if (posicion == 0) {
+            agregarAlInicio(dato);
+        } else if (posicion == size) {
+            agregarAlFinal(dato);
+        } else {
+            Nodo<T> nuevo = new Nodo<>(dato);
+            Nodo<T> actual = primero;
+
+
+            for (int i = 0; i < posicion - 1; i++) {
+                actual = actual.getSiguiente();
+            }
+
+            Nodo<T> siguiente = actual.getSiguiente();
+
+
+            nuevo.setSiguiente(siguiente);
+            nuevo.setAnterior(actual);
+            actual.setSiguiente(nuevo);
+            siguiente.setAnterior(nuevo);
+
+            size++;
+        }
+    }
+
 
     public Nodo<T> getPrimero() {
         return primero;
