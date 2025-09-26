@@ -51,7 +51,7 @@ public class ListaCircular<T extends Comparable<T>> implements Iterable<T> {
         size++;
     }
 
-    /** Inserta en posición [0..size]. 0 = inicio, size = final */
+
     public void agregarEnPosicionEspecifica(T dato, int posicion) {
         if (posicion < 0 || posicion > size) {
             throw new IndexOutOfBoundsException("Posición inválida: " + posicion);
@@ -73,7 +73,7 @@ public class ListaCircular<T extends Comparable<T>> implements Iterable<T> {
         return size == 0;
     }
 
-    /** Devuelve el índice de la primera coincidencia o -1 si no está */
+
     public int localizar(T datoBusqueda) {
         if (size == 0) return -1;
         Nodo<T> actual = primero;
@@ -103,14 +103,14 @@ public class ListaCircular<T extends Comparable<T>> implements Iterable<T> {
             return true;
         }
 
-        // Buscar el nodo anterior al que vamos a eliminar
+
         Nodo<T> prev = primero;
         Nodo<T> curr = primero.getProximo();
         for (int i = 1; i < size; i++) {
             if (curr.getDato().equals(datoBusqueda)) {
                 prev.setProximo(curr.getProximo());
                 if (curr == ultimo) {
-                    ultimo = prev; // actualizamos último si corresponde
+                    ultimo = prev; // actualizamos último
                 }
                 size--;
                 return true;
@@ -121,17 +121,14 @@ public class ListaCircular<T extends Comparable<T>> implements Iterable<T> {
         return false;
     }
 
-    /** Inserta manteniendo orden natural ascendente */
+
     public void AgregarOrdenNatural(T dato) {
         if (size == 0) { agregarPrimero(dato); return; }
 
-        // Va antes del primero
         if (dato.compareTo(primero.getDato()) <= 0) { agregarPrimero(dato); return; }
 
-        // Va después del último
         if (dato.compareTo(ultimo.getDato()) >= 0) { agregarAlFinal(dato); return; }
 
-        // Va en medio
         Nodo<T> prev = primero;
         Nodo<T> curr = primero.getProximo();
         while (curr != primero && dato.compareTo(curr.getDato()) > 0) {
