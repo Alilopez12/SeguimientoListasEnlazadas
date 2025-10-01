@@ -10,6 +10,7 @@ public class ListaDobleSimple<T> {
         this.ultimo = null;
         this.size = 0;
     }
+
     public void agregarAlInicio(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
 
@@ -23,6 +24,7 @@ public class ListaDobleSimple<T> {
         }
         size++;
     }
+
     public void agregarAlFinal(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
 
@@ -36,6 +38,7 @@ public class ListaDobleSimple<T> {
         }
         size++;
     }
+
     public void agregarEnPosicion(T dato, int posicion) {
         if (posicion < 0 || posicion > size) {
             throw new IndexOutOfBoundsException("Posición inválida");
