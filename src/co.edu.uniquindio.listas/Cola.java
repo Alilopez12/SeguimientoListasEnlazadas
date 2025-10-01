@@ -12,74 +12,74 @@ public class Cola<T> {
         size = 0;
     }
 
-    //Agregar un Elemento
-    public void agregar(T dato){
+    public Nodo<T> getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(Nodo<T> primero) {
+        this.primero = primero;
+    }
+
+    public Nodo<T> getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(Nodo<T> ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    //Método encolar (Agregr al final)
+    public void encolar(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
-        if(esVacia()){
-            primero = ultimo = nuevo;
+
+        if (estaVacia()) {
+
+            primero = nuevo;
+            ultimo = nuevo;
+
         } else {
+
             ultimo.setSiguiente(nuevo);
             ultimo = nuevo;
         }
         size++;
     }
 
-    //Eliminar un elemento
-    public T eliminar(){
-        if(esVacia()) {
-            throw new RuntimeException("La cola está vacía");
-        }
-
-        T dato = primero.getDato();
-        primero = primero.getSiguiente();
-        if(primero == null){
-            ultimo = null;
-        }
-        size --;
-        return dato;
-
-    }
-
-    //Método PEEK (obtener primero sin eliminar)
-    public T peek(){
-        return primero.getDato();
-    }
-
-    //Método POLL (obtener primero y eliminarlo)
-    public T poll(){
-        if(esVacia()) {
+    //Método desencolar (Quitar el primer elemento de la cola)
+    public T desencolar() {
+        if (estaVacia()) {
+            System.out.println("La cola está vacía, no se puede desencolar.");
             return null;
         }
 
         T dato = primero.getDato();
         primero = primero.getSiguiente();
-        if(primero == null){
+
+
+        if (primero == null) {
             ultimo = null;
         }
-        size --;
+
+        size--;
         return dato;
-
     }
 
-    //Mostrar los elementos de la Cola
-    public void mostrar() {
-        Nodo<T> actual = primero;
-        System.out.print("[");
-        while (actual != null) {
-            System.out.print(actual.getDato());
-            actual = actual.getSiguiente();
-            if (actual != null) System.out.print(" -> ");
-        }
-        System.out.println("]");
-    }
-
-    public boolean esVacia(){
+    //Metodo de Apoyo
+    public boolean estaVacia() {
         return size == 0;
     }
 
-    public int size(){
-        return size;
-    }
+
+
+
 
 
 }
