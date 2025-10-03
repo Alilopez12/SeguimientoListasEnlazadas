@@ -87,6 +87,36 @@ public class ListaDobleSimple<T extends Comparable<? super T>> {
         } while (swapped);
     }
 
+    public void InsertarSegunElValorDelDato(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (esVacia()) {
+            primero = ultimo = nuevo;
+        } else if (dato.compareTo(primero.getDato()) <= 0) {
+            // insertar al inicio
+            nuevo.setSiguiente(primero);
+            primero.setAnterior(nuevo);
+            primero = nuevo;
+        } else if (dato.compareTo(ultimo.getDato()) >= 0) {
+            // insertar al final
+            ultimo.setSiguiente(nuevo);
+            nuevo.setAnterior(ultimo);
+            ultimo = nuevo;
+        } else {
+            Nodo<T> act = primero.getSiguiente();
+            while (act != null && act.getDato().compareTo(dato) < 0) {
+                act = act.getSiguiente();
+            }
+            Nodo<T> prev = act.getAnterior();
+
+            nuevo.setAnterior(prev);
+            nuevo.setSiguiente(act);
+            prev.setSiguiente(nuevo);
+            act.setAnterior(nuevo);
+        }
+        size++;
+    }
+
 
 
 

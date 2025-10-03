@@ -176,6 +176,26 @@ public class ListaSimpleEnlazada<T extends Comparable<? super T>> implements Ite
             }
         } while (swapped);
     }
+    public void InsertarSegunElValorDelDato(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
 
+        if (primero == null || dato.compareTo(primero.getDato()) <= 0) {
+            nuevo.setSiguiente(primero);
+            primero = nuevo;
+            size++;
+            return;
+        }
+
+        Nodo<T> ant = primero;
+        Nodo<T> act = primero.getSiguiente();
+        while (act != null && act.getDato().compareTo(dato) < 0) {
+            ant = act;
+            act = act.getSiguiente();
+        }
+
+        nuevo.setSiguiente(act);
+        ant.setSiguiente(nuevo);
+        size++;
+    }
 
 }

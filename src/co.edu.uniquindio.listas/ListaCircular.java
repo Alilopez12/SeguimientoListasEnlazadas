@@ -181,4 +181,40 @@ public class ListaCircular<T extends Comparable<? super T>> implements Iterable<
         } while (swapped);
     }
 
+    public void InsertarSegunElValorDelDato(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (size == 0) {
+            primero = ultimo = nuevo;
+            nuevo.setSiguiente(nuevo);
+            nuevo.setAnterior(nuevo);
+        } else if (dato.compareTo(primero.getDato()) <= 0) {
+            nuevo.setSiguiente(primero);
+            nuevo.setAnterior(ultimo);
+            primero.setAnterior(nuevo);
+            ultimo.setSiguiente(nuevo);
+            primero = nuevo;
+        } else if (dato.compareTo(ultimo.getDato()) >= 0) {
+            // después del último (nuevo último)
+            nuevo.setAnterior(ultimo);
+            nuevo.setSiguiente(primero);
+            ultimo.setSiguiente(nuevo);
+            primero.setAnterior(nuevo);
+            ultimo = nuevo;
+        } else {
+            Nodo<T> act = primero.getSiguiente();
+            while (act != primero && act.getDato().compareTo(dato) < 0) {
+                act = act.getSiguiente();
+            }
+            Nodo<T> prev = act.getAnterior();
+
+            nuevo.setAnterior(prev);
+            nuevo.setSiguiente(act);
+            prev.setSiguiente(nuevo);
+            act.setAnterior(nuevo);
+        }
+        size++;
+    }
+
+
 }
