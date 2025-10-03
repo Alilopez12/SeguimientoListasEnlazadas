@@ -1,6 +1,6 @@
 package co.edu.uniquindio.listas;
 
-public class ListaCircularDoblementeEnlazada<T> {
+public class ListaCircularDoblementeEnlazada<T extends Comparable<? super T>>{
     private Nodo<T> primero;
     private Nodo<T> ultimo;
     private int size;
@@ -105,4 +105,26 @@ public class ListaCircularDoblementeEnlazada<T> {
         }
         System.out.println("]");
     }
+
+    public void sort() {
+        if (size <= 1) return;
+        boolean swapped;
+        do {
+            swapped = false;
+            Nodo<T> actual = primero;
+            for (int i = 0; i < size - 1; i++) {
+                Nodo<T> sig = actual.getSiguiente();
+                if (actual.getDato().compareTo(sig.getDato()) > 0) {
+                    T tmp = actual.getDato();
+                    actual.setDato(sig.getDato());
+                    sig.setDato(tmp);
+                    swapped = true;
+                }
+                actual = sig;
+            }
+        } while (swapped);
+    }
+
+
+
 }

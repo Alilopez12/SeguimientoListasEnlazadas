@@ -10,7 +10,6 @@ public class Main {
         imprimirDesdeFin(lista);
         imprimirSize(lista);
 
-
         titulo("Prueba agregarAlInicio()");
         lista.agregarAlInicio(20);
         lista.agregarAlInicio(10);
@@ -19,7 +18,6 @@ public class Main {
         imprimirDesdeFin(lista);
         imprimirSize(lista);
         validarEnlaces(lista);
-
 
         titulo("Prueba agregarAlFinal()");
         lista.agregarAlFinal(30);
@@ -36,14 +34,12 @@ public class Main {
         imprimirSize(lista);
         validarEnlaces(lista);
 
-
         titulo("Prueba agregarEnPosicion() al inicio (pos=0)");
         lista.agregarEnPosicion(-5, 0);
         imprimirDesdeInicio(lista);
         imprimirDesdeFin(lista);
         imprimirSize(lista);
         validarEnlaces(lista);
-
 
         titulo("Prueba agregarEnPosicion() al final (pos=size)");
         lista.agregarEnPosicion(50, lista.getSize());
@@ -52,8 +48,14 @@ public class Main {
         imprimirSize(lista);
         validarEnlaces(lista);
 
+        titulo("Prueba ordenar con sort()");
+        lista.sort();
+        imprimirDesdeInicio(lista);
+        imprimirDesdeFin(lista);
     }
-    private static <T> void imprimirDesdeInicio(ListaDobleSimple<T> lista) {
+
+    private static <T extends Comparable<? super T>>
+    void imprimirDesdeInicio(ListaDobleSimple<T> lista) {
         System.out.print("Inicio ");
         Nodo<T> actual = lista.getPrimero();
         while (actual != null) {
@@ -64,7 +66,8 @@ public class Main {
         System.out.println();
     }
 
-    private static <T> void imprimirDesdeFin(ListaDobleSimple<T> lista) {
+    private static <T extends Comparable<? super T>>
+    void imprimirDesdeFin(ListaDobleSimple<T> lista) {
         System.out.print("Fin  ");
         Nodo<T> actual = lista.getUltimo();
         while (actual != null) {
@@ -79,14 +82,13 @@ public class Main {
         System.out.println("size = " + lista.getSize());
     }
 
-
-    private static <T> void validarEnlaces(ListaDobleSimple<T> lista) {
+    private static <T extends Comparable<? super T>>
+    void validarEnlaces(ListaDobleSimple<T> lista) {
         int n = lista.getSize();
         if (n == 0) {
             System.out.println(".");
             return;
         }
-
 
         Nodo<T> p = lista.getPrimero();
         int pasos = 1;
@@ -113,6 +115,6 @@ public class Main {
     }
 
     private static void titulo(String t) {
-        System.out.println( " + Verifico metodos + ");
+        System.out.println(" + Verifico metodos: " + t + " + ");
     }
 }

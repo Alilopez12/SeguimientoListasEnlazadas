@@ -2,7 +2,7 @@ package co.edu.uniquindio.listas;
 
 import java.util.Iterator;
 
-public class ListaCircular<T extends Comparable<T>> implements Iterable<T> {
+public class ListaCircular<T extends Comparable<? super T>> implements Iterable<T> {
     private Nodo<T> primero;
     private Nodo<T> ultimo;
     private int size;
@@ -161,4 +161,24 @@ public class ListaCircular<T extends Comparable<T>> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new IteratorListaCircular<>(primero, size);
     }
+
+    public void sort() {
+        if (size <= 1) return;
+        boolean swapped;
+        do {
+            swapped = false;
+            Nodo<T> actual = primero;
+            for (int i = 0; i < size - 1; i++) {
+                Nodo<T> sig = actual.getSiguiente();
+                if (actual.getDato().compareTo(sig.getDato()) > 0) {
+                    T tmp = actual.getDato();
+                    actual.setDato(sig.getDato());
+                    sig.setDato(tmp);
+                    swapped = true;
+                }
+                actual = sig;
+            }
+        } while (swapped);
+    }
+
 }

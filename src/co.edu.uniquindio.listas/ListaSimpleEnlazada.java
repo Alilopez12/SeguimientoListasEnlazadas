@@ -2,7 +2,7 @@ package co.edu.uniquindio.listas;
 
 import java.util.Iterator;
 
-public class ListaSimpleEnlazada<T extends Comparable<T>> implements Iterable<T> {
+public class ListaSimpleEnlazada<T extends Comparable<? super T>> implements Iterable<T> {
     private Nodo<T> primero;
     private int size;
 
@@ -154,9 +154,28 @@ public class ListaSimpleEnlazada<T extends Comparable<T>> implements Iterable<T>
         System.out.println(mensaje);
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return new IteratorListaSimpleEnlazada<>(primero);
     }
+    public void sort() {
+        if (size <= 1) return;
+        boolean swapped;
+        do {
+            swapped = false;
+            Nodo<T> actual = primero;
+            while (actual != null && actual.getSiguiente() != null) {
+                Nodo<T> sig = actual.getSiguiente();
+                if (actual.getDato().compareTo(sig.getDato()) > 0) {
+                    T tmp = actual.getDato();
+                    actual.setDato(sig.getDato());
+                    sig.setDato(tmp);
+                    swapped = true;
+                }
+                actual = sig;
+            }
+        } while (swapped);
+    }
+
+
 }

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.listas;
 
-public class ListaDobleSimple<T> {
+public class ListaDobleSimple<T extends Comparable<? super T>> {
     private Nodo<T> primero;
     private Nodo<T> ultimo;
     private int size;
@@ -68,6 +68,26 @@ public class ListaDobleSimple<T> {
             size++;
         }
     }
+    public void sort() {
+        if (size <= 1) return;
+        boolean swapped;
+        do {
+            swapped = false;
+            Nodo<T> actual = primero;
+            while (actual != null && actual.getSiguiente() != null) {
+                Nodo<T> sig = actual.getSiguiente();
+                if (actual.getDato().compareTo(sig.getDato()) > 0) {
+                    T tmp = actual.getDato();
+                    actual.setDato(sig.getDato());
+                    sig.setDato(tmp);
+                    swapped = true;
+                }
+                actual = sig;
+            }
+        } while (swapped);
+    }
+
+
 
 
     public Nodo<T> getPrimero() {
